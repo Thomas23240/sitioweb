@@ -1,0 +1,308 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Cuerda de Escalada Pro 10mm",
+      "categoria": "escalada",
+      "precio": 129.99,
+      "descripcion": "Cuerda dinámica de 60 metros, certificada UIAA. Perfecta para escalada deportiva y alpinismo. Alta resistencia a la abrasión y tratamiento dry para uso en condiciones húmedas.",
+      "imagen": "assets/images/productos/escalada/cuerda1.jpg",
+      "stock": 25,
+      "caracteristicas": [
+        "Longitud: 60m",
+        "Diámetro: 10mm",
+        "Certificación UIAA",
+        "Tratamiento Dry",
+        "Peso: 4.2kg"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Arnés de Escalada Alpine",
+      "categoria": "escalada",
+      "precio": 89.99,
+      "descripcion": "Arnés versátil y cómodo para escalada deportiva y tradicional. Cuatro porta-materiales ajustables y acolchado ergonómico en cintura y piernas.",
+      "imagen": "assets/images/productos/escalada/arnes1.jpg",
+      "stock": 18,
+      "tallas": ["S", "M", "L", "XL"],
+      "caracteristicas": [
+        "4 porta-materiales",
+        "Acolchado ergonómico",
+        "Ajuste rápido",
+        "Certificación CE"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Mosquetón HMS Seguridad",
+      "categoria": "escalada",
+      "precio": 24.99,
+      "descripcion": "Mosquetón de acero con cierre de seguridad automático. Ideal para aseguramiento y rappel. Resistencia de 25kN.",
+      "imagen": "assets/images/productos/escalada/mosqueton1.jpg",
+      "stock": 50,
+      "colores": ["Plata", "Negro", "Azul"],
+      "caracteristicas": [
+        "Resistencia: 25kN",
+        "Cierre automático",
+        "Material: Acero",
+        "Peso: 95g"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Casco de Escalada Vertex",
+      "categoria": "escalada",
+      "precio": 79.99,
+      "descripcion": "Casco ultraligero con ventilación optimizada. Protección superior contra impactos y penetraciones. Ajuste mediante ruleta trasera.",
+      "imagen": "assets/images/productos/escalada/casco1.jpg",
+      "stock": 15,
+      "tallas": ["S/M", "M/L"],
+      "colores": ["Blanco", "Negro", "Naranja"],
+      "caracteristicas": [
+        "Peso: 280g",
+        "Ventilación mejorada",
+        "Ajuste ruleta",
+        "Certificación EN 12492"
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Chaqueta Alpine Summit",
+      "categoria": "ropa",
+      "precio": 249.99,
+      "descripcion": "Chaqueta impermeable y transpirable con membrana Gore-Tex. Diseñada para alta montaña con capucha ajustable y múltiples bolsillos estratégicos.",
+      "imagen": "assets/images/productos/ropa/chaqueta1.jpg",
+      "stock": 30,
+      "tallas": ["S", "M", "L", "XL", "XXL"],
+      "colores": ["Azul Marino", "Negro", "Rojo Montaña"],
+      "caracteristicas": [
+        "Gore-Tex Pro",
+        "Impermeabilidad: 28,000mm",
+        "Transpirabilidad: 20,000g/m²",
+        "Capucha ajustable",
+        "5 bolsillos"
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Chaqueta Softshell Explorer",
+      "categoria": "ropa",
+      "precio": 159.99,
+      "descripcion": "Chaqueta versátil softshell con protección contra viento y agua. Ideal para trekking y uso diario en montaña. Material elástico de 4 direcciones.",
+      "imagen": "assets/images/productos/ropa/chaqueta2.jpg",
+      "stock": 22,
+      "tallas": ["XS", "S", "M", "L", "XL"],
+      "colores": ["Gris Carbón", "Verde Bosque", "Azul Acero"],
+      "caracteristicas": [
+        "Tejido elástico 4D",
+        "Resistente al viento",
+        "DWR coating",
+        "2 bolsillos con cremallera",
+        "Puños ajustables"
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Pantalón Trekking Pro",
+      "categoria": "ropa",
+      "precio": 119.99,
+      "descripcion": "Pantalón técnico de trekking con tejido de secado rápido. Refuerzos en rodillas y entrepierna. Convertible a bermuda mediante cremalleras.",
+      "imagen": "assets/images/productos/ropa/pantalon1.jpg",
+      "stock": 28,
+      "tallas": ["28", "30", "32", "34", "36", "38"],
+      "colores": ["Beige", "Gris", "Oliva"],
+      "caracteristicas": [
+        "Convertible a bermuda",
+        "Secado rápido",
+        "Protección UV 50+",
+        "6 bolsillos",
+        "Cintura ajustable"
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "Chaleco Térmico Altitude",
+      "categoria": "ropa",
+      "precio": 89.99,
+      "descripcion": "Chaleco aislante con relleno sintético PrimaLoft. Comprimible y ultraligero. Perfecto como capa intermedia en alta montaña.",
+      "imagen": "assets/images/productos/ropa/chaleco1.jpg",
+      "stock": 20,
+      "tallas": ["S", "M", "L", "XL"],
+      "colores": ["Negro", "Azul Profundo", "Gris"],
+      "caracteristicas": [
+        "Relleno PrimaLoft",
+        "Peso: 320g",
+        "Comprimible",
+        "2 bolsillos laterales",
+        "Bolsillo interno"
+      ]
+    },
+    {
+      "id": 9,
+      "nombre": "Collar Compass Rose",
+      "categoria": "joyeria",
+      "precio": 79.99,
+      "descripcion": "Collar de acero inoxidable con dije de brújula. Diseño minimalista inspirado en la aventura. Cadena ajustable de 45-50cm.",
+      "imagen": "assets/images/productos/joyeria/collar1.jpg",
+      "stock": 35,
+      "materiales": ["Acero Inoxidable 316L"],
+      "caracteristicas": [
+        "Diseño brújula",
+        "Cadena ajustable",
+        "Resistente al agua",
+        "Hipoalergénico",
+        "Incluye caja de regalo"
+      ]
+    },
+    {
+      "id": 10,
+      "nombre": "Pulsera Mountain Cord",
+      "categoria": "joyeria",
+      "precio": 45.99,
+      "descripcion": "Pulsera trenzada de paracord con cierre de acero. Diseño aventurero y funcional. Disponible en varios colores outdoor.",
+      "imagen": "assets/images/productos/joyeria/pulsera1.jpg",
+      "stock": 42,
+      "colores": ["Negro/Gris", "Verde/Beige", "Azul/Negro"],
+      "caracteristicas": [
+        "Paracord 550",
+        "Cierre de acero",
+        "Ajustable",
+        "Resistente",
+        "Unisex"
+      ]
+    },
+    {
+      "id": 11,
+      "nombre": "Anillo Summit Peak",
+      "categoria": "joyeria",
+      "precio": 89.99,
+      "descripcion": "Anillo de plata 925 con diseño de cordillera montañosa. Acabado mate y pulido. Pieza única para amantes de la montaña.",
+      "imagen": "assets/images/productos/joyeria/anillo1.jpg",
+      "stock": 18,
+      "tallas": ["6", "7", "8", "9", "10", "11"],
+      "materiales": ["Plata 925"],
+      "caracteristicas": [
+        "Plata esterlina",
+        "Diseño montaña",
+        "Acabado mate",
+        "Grabado interior",
+        "Caja incluida"
+      ]
+    },
+    {
+      "id": 12,
+      "nombre": "Aretes Minimal Peak",
+      "categoria": "joyeria",
+      "precio": 59.99,
+      "descripcion": "Aretes pequeños de acero con forma de montaña. Diseño minimalista y elegante. Cierre de presión seguro.",
+      "imagen": "assets/images/productos/joyeria/aretes1.jpg",
+      "stock": 40,
+      "materiales": ["Acero Inoxidable"],
+      "caracteristicas": [
+        "Diseño minimalista",
+        "Cierre presión",
+        "Hipoalergénico",
+        "Tamaño: 8mm",
+        "Unisex"
+      ]
+    },
+    {
+      "id": 13,
+      "nombre": "Reloj Tactical Explorer GPS",
+      "categoria": "relojes",
+      "precio": 399.99,
+      "descripcion": "Reloj deportivo con GPS integrado, altímetro barométrico y brújula digital. Resistencia al agua 100m. Batería de 30 días en modo smartwatch.",
+      "imagen": "assets/images/productos/relojes/reloj1.jpg",
+      "stock": 12,
+      "colores": ["Negro", "Gris Titanio"],
+      "caracteristicas": [
+        "GPS integrado",
+        "Altímetro barométrico",
+        "Brújula digital",
+        "Resistencia 10ATM",
+        "Batería 30 días",
+        "Mapas offline"
+      ]
+    },
+    {
+      "id": 14,
+      "nombre": "Reloj Mountaineer Pro",
+      "categoria": "relojes",
+      "precio": 279.99,
+      "descripcion": "Reloj multideporte con monitor de frecuencia cardíaca y oxígeno en sangre. Pantalla AMOLED de 1.4 pulgadas. Más de 100 modos deportivos.",
+      "imagen": "assets/images/productos/relojes/reloj2.jpg",
+      "stock": 15,
+      "colores": ["Negro", "Azul Profundo", "Plateado"],
+      "caracteristicas": [
+        "Monitor FC 24/7",
+        "SpO2",
+        "Pantalla AMOLED",
+        "100+ deportes",
+        "Resistencia 5ATM",
+        "Batería 14 días"
+      ]
+    },
+    {
+      "id": 15,
+      "nombre": "Reloj Adventure Chrono",
+      "categoria": "relojes",
+      "precio": 189.99,
+      "descripcion": "Cronógrafo deportivo con caja de acero inoxidable. Resistente a golpes y agua. Esfera luminosa para lectura nocturna.",
+      "imagen": "assets/images/productos/relojes/reloj3.jpg",
+      "stock": 20,
+      "colores": ["Negro/Naranja", "Plata/Azul", "Negro/Verde"],
+      "caracteristicas": [
+        "Cronógrafo",
+        "Acero inoxidable",
+        "Esfera luminosa",
+        "Resistencia 20ATM",
+        "Cristal zafiro",
+        "Correa silicona"
+      ]
+    },
+    {
+      "id": 16,
+      "nombre": "Reloj Summit Digital",
+      "categoria": "relojes",
+      "precio": 149.99,
+      "descripcion": "Reloj digital robusto con funciones básicas de altímetro, barómetro y termómetro. Ideal para trekking y camping. Solar powered.",
+      "imagen": "assets/images/productos/relojes/reloj4.jpg",
+      "stock": 25,
+      "colores": ["Negro", "Verde Militar", "Gris"],
+      "caracteristicas": [
+        "Energía solar",
+        "Altímetro",
+        "Barómetro",
+        "Termómetro",
+        "Resistencia 10ATM",
+        "Alarmas múltiples"
+      ]
+    }
+  ],
+  "categorias": [
+    {
+      "id": "escalada",
+      "nombre": "Escalada",
+      "descripcion": "Equipamiento profesional para escalada deportiva y alpinismo",
+      "imagen": "assets/images/categorias/cat-escalada.jpg"
+    },
+    {
+      "id": "ropa",
+      "nombre": "Ropa",
+      "descripcion": "Indumentaria técnica para montaña y outdoor",
+      "imagen": "assets/images/categorias/cat-ropa.jpg"
+    },
+    {
+      "id": "joyeria",
+      "nombre": "Joyería",
+      "descripcion": "Accesorios inspirados en la aventura y la naturaleza",
+      "imagen": "assets/images/categorias/cat-joyeria.jpg"
+    },
+    {
+      "id": "relojes",
+      "nombre": "Relojes",
+      "descripcion": "Relojes deportivos y tácticos para aventureros",
+      "imagen": "assets/images/categorias/cat-relojes.jpg"
+    }
+  ]
+}
