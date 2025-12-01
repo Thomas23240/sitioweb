@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - AURETTI</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/productos.css">
+</head>
+<body>
+
+    <header id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-content">
+                    <!-- Logo -->
+                    <a href="../index.html" class="logo">AURETTI</a>
+                    
+                    <!-- Menú Hamburguesa -->
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                    <!-- Menú de Navegación -->
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="productos.html?categoria=escalada">Escalada</a></li>
+                        <li><a href="productos.html?categoria=ropa">Ropa</a></li>
+                        <li><a href="productos.html?categoria=joyeria">Joyería</a></li>
+                        <li><a href="productos.html?categoria=relojes">Relojes</a></li>
+                        <li><a href="../index.html#about">Nosotros</a></li>
+                    </ul>
+                    
+                    <!-- Iconos de Usuario y Carrito -->
+                    <div class="nav-icons">
+                        <button class="icon-btn" id="searchBtn" aria-label="Buscar">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <button class="icon-btn" id="userBtn" aria-label="Usuario">
+                            <i class="bi bi-person"></i>
+                        </button>
+                        <button class="icon-btn" id="cartBtn" aria-label="Carrito">
+                            <i class="bi bi-bag"></i>
+                            <span class="badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="height: 80px;"></div>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Productos</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Productos Section -->
+    <section class="productos-section py-5">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Sidebar de Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="filters-sidebar">
+                        
+                        <!-- Buscador -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Buscar</h4>
+                            <div class="search-box">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Buscar productos...">
+                                <i class="bi bi-search"></i>
+                            </div>
+                        </div>
+
+                        <!-- Filtro por Categoría -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Categorías</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="radio" name="categoria" value="todas" checked>
+                                    <span>Todas las Categorías</span>
+                                    <span class="count" id="count-todas">0</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="categoria" value="escalada">
+                                    <span>Escalada</span>
+                                    <span class="count" id="count-escalada">0</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="categoria" value="ropa">
+                                    <span>Ropa</span>
+                                    <span class="count" id="count-ropa">0</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="categoria" value="joyeria">
+                                    <span>Joyería</span>
+                                    <span class="count" id="count-joyeria">0</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="categoria" value="relojes">
+                                    <span>Relojes</span>
+                                    <span class="count" id="count-relojes">0</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Filtro por Precio -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Rango de Precio</h4>
+                            <div class="price-range">
+                                <input type="range" id="priceRange" class="form-range" min="0" max="500" value="500" step="10">
+                                <div class="price-labels">
+                                    <span>$0</span>
+                                    <span id="maxPrice">$500</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filtro por Disponibilidad -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Disponibilidad</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" id="enStock" checked>
+                                    <span>En Stock</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" id="pocasUnidades">
+                                    <span>Pocas Unidades (< 10)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Botón Limpiar Filtros -->
+                        <button class="btn btn-outline w-100 mt-3" id="clearFilters">
+                            <i class="bi bi-x-circle"></i> Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div class="col-lg-9">
+                    
+                    <!-- Barra de Herramientas -->
+                    <div class="toolbar">
+                        <div class="toolbar-left">
+                            <h2 class="productos-title" id="categoryTitle">Todos los Productos</h2>
+                            <span class="productos-count" id="productCount">0 productos</span>
+                        </div>
+                        <div class="toolbar-right">
+                            <select class="form-select" id="sortSelect">
+                                <option value="destacados">Destacados</option>
+                                <option value="nombre-asc">Nombre: A-Z</option>
+                                <option value="nombre-desc">Nombre: Z-A</option>
+                                <option value="precio-asc">Precio: Menor a Mayor</option>
+                                <option value="precio-desc">Precio: Mayor a Menor</option>
+                                <option value="mas-nuevo">Más Nuevos</option>
+                            </select>
+                            
+                            <!-- Vista Grid/Lista -->
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid" title="Vista cuadrícula">
+                                    <i class="bi bi-grid-3x3-gap"></i>
+                                </button>
+                                <button class="view-btn" data-view="list" title="Vista lista">
+                                    <i class="bi bi-list-ul"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mensaje de carga -->
+                    <div id="loadingSpinner" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando productos...</span>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Productos -->
+                    <div class="productos-grid" id="productosGrid">
+                        <!-- Los productos se cargarán aquí dinámicamente -->
+                    </div>
+
+                    <!-- Paginación -->
+                    <nav aria-label="Paginación de productos" class="mt-5">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- La paginación se generará dinámicamente -->
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AURETTI</h3>
+                    <p>Tu compañero de confianza en cada aventura. Equipamiento premium para quienes buscan lo extraordinario.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="productos.html">Tienda</a></li>
+                        <li><a href="../index.html#about">Sobre Nosotros</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul class="footer-links">
+                        <li><a href="productos.html?categoria=escalada">Escalada</a></li>
+                        <li><a href="productos.html?categoria=ropa">Ropa</a></li>
+                        <li><a href="productos.html?categoria=joyeria">Joyería</a></li>
+                        <li><a href="productos.html?categoria=relojes">Relojes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt"></i> San Salvador, El Salvador</li>
+                        <li><i class="bi bi-phone"></i> +503 2222-3333</li>
+                        <li><i class="bi bi-envelope"></i> info@auretti.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AURETTI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript Personalizado -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/productos.js"></script>
+</body>
+</html>

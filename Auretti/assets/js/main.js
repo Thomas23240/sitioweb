@@ -1,4 +1,3 @@
-
 let carrito = [];
 let productos = [];
 let usuarioActual = null;
@@ -96,6 +95,20 @@ function initEventListeners() {
     const cartBtn = document.getElementById('cartBtn');
     if (cartBtn) {
         cartBtn.addEventListener('click', function() {
+            // VALIDAR LOGIN ANTES DE IR AL CARRITO
+            if (!usuarioActual) {
+                mostrarNotificacion('⚠️ Debes iniciar sesión para ver tu carrito', 'warning');
+                setTimeout(() => {
+                    if (confirm('¿Deseas iniciar sesión ahora?')) {
+                        const rutaLogin = window.location.pathname.includes('/pages/') 
+                            ? 'login.html' 
+                            : 'pages/login.html';
+                        window.location.href = rutaLogin;
+                    }
+                }, 500);
+                return;
+            }
+            
             const rutaCarrito = window.location.pathname.includes('/pages/') 
                 ? 'carrito.html' 
                 : 'pages/carrito.html';
@@ -107,7 +120,10 @@ function initEventListeners() {
     const searchBtn = document.getElementById('searchBtn');
     if (searchBtn) {
         searchBtn.addEventListener('click', function() {
-            alert('🔍 Función de búsqueda próximamente');
+            const rutaProductos = window.location.pathname.includes('/pages/') 
+                ? 'productos.html' 
+                : 'pages/productos.html';
+            window.location.href = rutaProductos;
         });
     }
     
@@ -117,7 +133,7 @@ function initEventListeners() {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
-            alert(`¡Gracias por suscribirte! Recibirás nuestras novedades en ${email}`);
+            mostrarNotificacion(`✅ ¡Gracias por suscribirte! Recibirás nuestras novedades en ${email}`, 'success');
             this.reset();
         });
     }
@@ -243,7 +259,7 @@ function cerrarSesionCompleta() {
     if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
         localStorage.removeItem('auretti_usuario');
         localStorage.removeItem('auretti_recordar');
-        mostrarNotificacion('Sesión cerrada correctamente', 'info');
+        mostrarNotificacion('✅ Sesión cerrada correctamente', 'info');
         
         // Recargar la página actual
         setTimeout(() => {
@@ -262,7 +278,7 @@ function irAAdmin() {
 async function cargarProductos() {
     try {
         // Intentar diferentes rutas según dónde estemos
-        let rutaJSON = '/data/productos.json';
+        let rutaJSON = 'data/productos.json';
         if (window.location.pathname.includes('/pages/')) {
             rutaJSON = '../data/productos.json';
         }
@@ -275,10 +291,10 @@ async function cargarProductos() {
         
         const data = await response.json();
         productos = data.productos;
-        console.log('Productos cargados:', productos.length);
+        console.log('✅ Productos cargados:', productos.length);
         return productos;
     } catch (error) {
-        console.error('Error cargando productos:', error);
+        console.error('❌ Error cargando productos:', error);
         
         // Productos de respaldo (fallback)
         productos = obtenerProductosFallback();
@@ -399,7 +415,7 @@ function crearTarjetaProducto(producto) {
         <div class="product-card">
             <div class="product-img-wrapper">
                 <img src="${producto.imagen}" alt="${producto.nombre}" class="product-img" 
-                     onerror="this.src='https://via.placeholder.com/300x300?text=AURETTI'">
+                     onerror="this.src='https://placehold.co/300x300/1a4d2e/white?text=AURETTI'">
                 ${producto.stock < 10 ? '<span class="product-badge">¡Últimas!</span>' : ''}
             </div>
             <div class="product-body">
@@ -438,11 +454,28 @@ function agregarEventListenersProductos() {
     });
 }
 
+// ⭐ FUNCIÓN PRINCIPAL CON VALIDACIÓN DE LOGIN
 function agregarAlCarrito(productoId) {
+    // 🔒 VALIDAR SI EL USUARIO ESTÁ LOGUEADO
+    if (!usuarioActual) {
+        mostrarNotificacion('⚠️ Debes iniciar sesión para agregar productos al carrito', 'warning');
+        
+        // Preguntar si desea ir a login
+        setTimeout(() => {
+            if (confirm('¿Deseas iniciar sesión ahora?')) {
+                const rutaLogin = window.location.pathname.includes('/pages/') 
+                    ? 'login.html' 
+                    : 'pages/login.html';
+                window.location.href = rutaLogin;
+            }
+        }, 500);
+        return; // DETENER la función aquí
+    }
+    
     const producto = productos.find(p => p.id === productoId);
     
     if (!producto) {
-        alert(' Producto no encontrado');
+        mostrarNotificacion('❌ Producto no encontrado', 'danger');
         return;
     }
     
@@ -453,9 +486,9 @@ function agregarAlCarrito(productoId) {
         // Incrementar cantidad
         if (itemExistente.cantidad < producto.stock) {
             itemExistente.cantidad++;
-            mostrarNotificacion(` Cantidad actualizada: ${producto.nombre}`, 'success');
+            mostrarNotificacion(`✅ Cantidad actualizada: ${producto.nombre}`, 'success');
         } else {
-            mostrarNotificacion(` Stock máximo alcanzado`, 'warning');
+            mostrarNotificacion(`⚠️ Stock máximo alcanzado`, 'warning');
             return;
         }
     } else {
@@ -510,7 +543,7 @@ function cargarUsuarioActual() {
     const usuarioGuardado = localStorage.getItem('auretti_usuario');
     if (usuarioGuardado) {
         usuarioActual = JSON.parse(usuarioGuardado);
-        console.log(' Usuario logueado:', usuarioActual.email);
+        console.log('✅ Usuario logueado:', usuarioActual.email);
         
         // Cambiar icono de usuario si está logueado
         const userBtn = document.getElementById('userBtn');
@@ -525,8 +558,16 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
     // Crear elemento de notificación
     const notificacion = document.createElement('div');
     notificacion.className = `notificacion notificacion-${tipo}`;
+    
+    const iconos = {
+        'success': 'bi-check-circle',
+        'warning': 'bi-exclamation-triangle',
+        'danger': 'bi-x-circle',
+        'info': 'bi-info-circle'
+    };
+    
     notificacion.innerHTML = `
-        <i class="bi bi-check-circle"></i>
+        <i class="bi ${iconos[tipo] || 'bi-info-circle'}"></i>
         <span>${mensaje}</span>
     `;
     
@@ -553,18 +594,29 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
             .notificacion-success {
                 border-left: 4px solid #28a745;
             }
+            .notificacion-success i {
+                color: #28a745;
+            }
             .notificacion-warning {
                 border-left: 4px solid #ffc107;
             }
-            .notificacion-error {
+            .notificacion-warning i {
+                color: #ffc107;
+            }
+            .notificacion-danger {
                 border-left: 4px solid #dc3545;
+            }
+            .notificacion-danger i {
+                color: #dc3545;
             }
             .notificacion-info {
                 border-left: 4px solid #17a2b8;
             }
+            .notificacion-info i {
+                color: #17a2b8;
+            }
             .notificacion i {
                 font-size: 1.5rem;
-                color: #28a745;
             }
             @keyframes slideIn {
                 from {
@@ -613,6 +665,7 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
+// Exportar funciones globales
 window.agregarAlCarrito = agregarAlCarrito;
 window.cerrarSesionCompleta = cerrarSesionCompleta;
 window.irAAdmin = irAAdmin;

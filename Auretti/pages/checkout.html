@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AURETTI</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    
+    <style>
+        .checkout-section {
+            background-color: var(--bg-light);
+        }
+        
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+        
+        .checkout-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--light-gray);
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-xs);
+            font-weight: 600;
+            color: var(--medium-gray);
+        }
+        
+        .step.active .step-circle {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .step.completed .step-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: var(--white);
+        }
+        
+        .step-label {
+            font-size: var(--fs-small);
+            color: var(--medium-gray);
+            font-weight: 500;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .checkout-form {
+            background: var(--white);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .section-title {
+            font-size: var(--fs-large);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .resumen-pedido {
+            background: var(--white);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+        }
+        
+        .producto-resumen {
+            display: flex;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .producto-resumen:last-child {
+            border-bottom: none;
+        }
+        
+        .producto-resumen-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .producto-resumen-details {
+            flex: 1;
+        }
+        
+        .producto-resumen-name {
+            font-size: var(--fs-small);
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        .producto-resumen-quantity {
+            font-size: var(--fs-small);
+            color: var(--medium-gray);
+        }
+        
+        .producto-resumen-price {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .metodo-pago {
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .metodo-pago:hover {
+            border-color: var(--primary-color);
+            background-color: var(--bg-light);
+        }
+        
+        .metodo-pago.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(26, 77, 46, 0.05);
+        }
+        
+        .metodo-pago input[type="radio"] {
+            margin-right: var(--spacing-sm);
+        }
+        
+        .metodo-pago-icon {
+            font-size: 2rem;
+            margin-right: var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-steps {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            
+            .checkout-steps::before {
+                display: none;
+            }
+            
+            .step {
+                display: flex;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .step-circle {
+                margin: 0 var(--spacing-sm) 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-content">
+                    <a href="../index.html" class="logo">AURETTI</a>
+                    <div class="nav-icons">
+                        <button class="icon-btn" id="userBtn" aria-label="Usuario">
+                            <i class="bi bi-person"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="height: 80px;"></div>
+
+    <section class="checkout-section py-5">
+        <div class="container">
+            <!-- Steps Progress -->
+            <div class="checkout-steps">
+                <div class="step completed">
+                    <div class="step-circle"><i class="bi bi-check"></i></div>
+                    <div class="step-label">Carrito</div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Información</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Pago</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Confirmación</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Formulario de Checkout -->
+                <div class="col-lg-7 mb-4">
+                    <div class="checkout-form">
+                        <form id="checkoutForm">
+                            <!-- Información Personal -->
+                            <h3 class="section-title">
+                                <i class="bi bi-person-fill"></i> Información Personal
+                            </h3>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre *</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Apellido *</label>
+                                    <input type="text" class="form-control" id="apellido" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Correo Electrónico *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono *</label>
+                                    <input type="tel" class="form-control" id="telefono" placeholder="2222-3333" required>
+                                </div>
+                            </div>
+
+                            <!-- Dirección de Envío -->
+                            <h3 class="section-title mt-4">
+                                <i class="bi bi-geo-alt-fill"></i> Dirección de Envío
+                            </h3>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Dirección Completa *</label>
+                                <input type="text" class="form-control" id="direccion" placeholder="Calle, número, colonia" required>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Ciudad *</label>
+                                    <input type="text" class="form-control" id="ciudad" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Departamento *</label>
+                                    <select class="form-select" id="departamento" required>
+                                        <option value="">Selecciona...</option>
+                                        <option value="san-salvador">San Salvador</option>
+                                        <option value="la-libertad">La Libertad</option>
+                                        <option value="santa-ana">Santa Ana</option>
+                                        <option value="san-miguel">San Miguel</option>
+                                        <option value="usulutan">Usulután</option>
+                                        <option value="sonsonate">Sonsonate</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Código Postal</label>
+                                <input type="text" class="form-control" id="codigoPostal">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Notas de Entrega (opcional)</label>
+                                <textarea class="form-control" id="notas" rows="3" placeholder="Instrucciones especiales para la entrega"></textarea>
+                            </div>
+
+                            <!-- Método de Pago -->
+                            <h3 class="section-title mt-4">
+                                <i class="bi bi-credit-card-fill"></i> Método de Pago
+                            </h3>
+                            
+                            <div class="metodo-pago selected" onclick="seleccionarMetodoPago(this, 'tarjeta')">
+                                <input type="radio" name="metodoPago" value="tarjeta" checked>
+                                <i class="bi bi-credit-card metodo-pago-icon"></i>
+                                <strong>Tarjeta de Crédito/Débito</strong>
+                                <p class="mb-0 mt-2" style="font-size: var(--fs-small); color: var(--medium-gray); margin-left: 56px;">
+                                    Pago seguro con SSL
+                                </p>
+                            </div>
+                            
+                            <div class="metodo-pago" onclick="seleccionarMetodoPago(this, 'paypal')">
+                                <input type="radio" name="metodoPago" value="paypal">
+                                <i class="bi bi-paypal metodo-pago-icon" style="color: #0070ba;"></i>
+                                <strong>PayPal</strong>
+                                <p class="mb-0 mt-2" style="font-size: var(--fs-small); color: var(--medium-gray); margin-left: 56px;">
+                                    Paga con tu cuenta PayPal
+                                </p>
+                            </div>
+                            
+                            <div class="metodo-pago" onclick="seleccionarMetodoPago(this, 'contraentrega')">
+                                <input type="radio" name="metodoPago" value="contraentrega">
+                                <i class="bi bi-cash metodo-pago-icon"></i>
+                                <strong>Pago Contraentrega</strong>
+                                <p class="mb-0 mt-2" style="font-size: var(--fs-small); color: var(--medium-gray); margin-left: 56px;">
+                                    Paga cuando recibas tu pedido
+                                </p>
+                            </div>
+                            
+                            <!-- Datos de Tarjeta (solo si selecciona tarjeta) -->
+                            <div id="datosTarjeta" class="mt-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Número de Tarjeta</label>
+                                    <input type="text" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Fecha de Expiración</label>
+                                        <input type="text" class="form-control" placeholder="MM/AA" maxlength="5">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">CVV</label>
+                                        <input type="text" class="form-control" placeholder="123" maxlength="3">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Términos y Condiciones -->
+                            <div class="form-check mt-4">
+                                <input class="form-check-input" type="checkbox" id="terminos" required>
+                                <label class="form-check-label" for="terminos">
+                                    Acepto los <a href="#" style="color: var(--primary-color);">términos y condiciones</a> y la 
+                                    <a href="#" style="color: var(--primary-color);">política de privacidad</a>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
+                                <i class="bi bi-lock-fill"></i> Finalizar Compra
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Resumen del Pedido -->
+                <div class="col-lg-5">
+                    <div class="resumen-pedido">
+                        <h3 class="section-title">Resumen del Pedido</h3>
+                        
+                        <div id="productosResumen" class="mb-4">
+                            <!-- Se cargará dinámicamente -->
+                        </div>
+                        
+                        <div class="resumen-item subtotal" style="padding: 10px 0; display: flex; justify-content: space-between;">
+                            <span>Subtotal</span>
+                            <span id="resumenSubtotal">$0.00</span>
+                        </div>
+                        
+                        <div class="resumen-item descuento" id="resumenDescuentoDiv" style="padding: 10px 0; display: none; justify-content: space-between; color: var(--success);">
+                            <span>Descuento</span>
+                            <span id="resumenDescuento">-$0.00</span>
+                        </div>
+                        
+                        <div class="resumen-item envio" style="padding: 10px 0; display: flex; justify-content: space-between;">
+                            <span>Envío</span>
+                            <span id="resumenEnvio">$0.00</span>
+                        </div>
+                        
+                        <div class="resumen-item total" style="padding: 15px 0; margin-top: 10px; border-top: 2px solid var(--light-gray); display: flex; justify-content: space-between; font-size: var(--fs-large); font-weight: 700;">
+                            <span>Total</span>
+                            <span id="resumenTotal">$0.00</span>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3" style="font-size: var(--fs-small);">
+                            <i class="bi bi-shield-check"></i> Pago 100% seguro y protegido
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 AURETTI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript Personalizado -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Código específico del checkout
+        document.addEventListener('DOMContentLoaded', function() {
+            verificarAutenticacion();
+            cargarDatosUsuario();
+            cargarResumenPedido();
+            initCheckoutForm();
+            toggleDatosTarjeta();
+        });
+        
+        function verificarAutenticacion() {
+            if (!usuarioActual) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        function cargarDatosUsuario() {
+            if (usuarioActual) {
+                document.getElementById('email').value = usuarioActual.email || '';
+                const nombreCompleto = (usuarioActual.nombre || '').split(' ');
+                document.getElementById('nombre').value = nombreCompleto[0] || '';
+                document.getElementById('apellido').value = nombreCompleto.slice(1).join(' ') || '';
+            }
+        }
+        
+        function cargarResumenPedido() {
+            const pedidoTemp = localStorage.getItem('auretti_pedido_temp');
+            if (!pedidoTemp) {
+                window.location.href = 'carrito.html';
+                return;
+            }
+            
+            const pedido = JSON.parse(pedidoTemp);
+            const contenedor = document.getElementById('productosResumen');
+            
+            contenedor.innerHTML = pedido.items.map(item => `
+                <div class="producto-resumen">
+                    <img src="../${item.imagen}" class="producto-resumen-img" alt="${item.nombre}"
+                         onerror="this.src='https://placehold.co/60x60/1a4d2e/white?text=A'">
+                    <div class="producto-resumen-details">
+                        <p class="producto-resumen-name">${item.nombre}</p>
+                        <p class="producto-resumen-quantity">Cantidad: ${item.cantidad}</p>
+                    </div>
+                    <div class="producto-resumen-price">
+                        $${(item.precio * item.cantidad).toFixed(2)}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('resumenSubtotal').textContent = `$${pedido.subtotal.toFixed(2)}`;
+            document.getElementById('resumenEnvio').textContent = pedido.envio === 0 ? '¡GRATIS!' : `$${pedido.envio.toFixed(2)}`;
+            document.getElementById('resumenTotal').textContent = `$${pedido.total.toFixed(2)}`;
+            
+            if (pedido.descuento > 0) {
+                document.getElementById('resumenDescuentoDiv').style.display = 'flex';
+                document.getElementById('resumenDescuento').textContent = `-$${pedido.descuento.toFixed(2)}`;
+            }
+        }
+        
+        function seleccionarMetodoPago(elemento, metodo) {
+            document.querySelectorAll('.metodo-pago').forEach(el => el.classList.remove('selected'));
+            elemento.classList.add('selected');
+            elemento.querySelector('input[type="radio"]').checked = true;
+            toggleDatosTarjeta();
+        }
+        
+        function toggleDatosTarjeta() {
+            const datosTarjeta = document.getElementById('datosTarjeta');
+            const metodoPagoSeleccionado = document.querySelector('input[name="metodoPago"]:checked').value;
+            datosTarjeta.style.display = metodoPagoSeleccionado === 'tarjeta' ? 'block' : 'none';
+        }
+        
+        function initCheckoutForm() {
+            const form = document.getElementById('checkoutForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                procesarPedido();
+            });
+        }
+        
+        function procesarPedido() {
+            // Simular procesamiento
+            mostrarNotificacion('⏳ Procesando tu pedido...', 'info');
+            
+            setTimeout(() => {
+                const numeroPedido = Math.floor(100000 + Math.random() * 900000);
+                
+                // Guardar pedido
+                const pedido = {
+                    numero: numeroPedido,
+                    fecha: new Date().toISOString(),
+                    cliente: {
+                        nombre: document.getElementById('nombre').value,
+                        apellido: document.getElementById('apellido').value,
+                        email: document.getElementById('email').value,
+                        telefono: document.getElementById('telefono').value
+                    },
+                    direccion: {
+                        direccion: document.getElementById('direccion').value,
+                        ciudad: document.getElementById('ciudad').value,
+                        departamento: document.getElementById('departamento').value
+                    },
+                    items: carrito,
+                    estado: 'confirmado'
+                };
+                
+                // Limpiar carrito
+                carrito = [];
+                localStorage.removeItem('auretti_carrito');
+                localStorage.removeItem('auretti_pedido_temp');
+                localStorage.removeItem('auretti_cupon');
+                actualizarContadorCarrito();
+                
+                mostrarNotificacion('✅ ¡Pedido realizado exitosamente!', 'success');
+                
+                setTimeout(() => {
+                    alert(`✅ ¡Gracias por tu compra!\n\nNúmero de pedido: #${numeroPedido}\n\nRecibirás un correo de confirmación pronto.`);
+                    window.location.href = '../index.html';
+                }, 1500);
+            }, 2000);
+        }
+        
+        window.seleccionarMetodoPago = seleccionarMetodoPago;
+    </script>
+</body>
+</html>
